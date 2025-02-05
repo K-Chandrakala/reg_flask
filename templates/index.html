@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RegistrationForm</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Style1.css') }}">
+</head>
+<body>
+    <form id="RegistrationForm" method="post">
+        <div class="container">
+            <h2>RegistrationForm</h2>
+            
+            <!-- Success Message -->
+            {% if success_message %}
+                <div class="success-message">
+                    <p>{{ success_message }}</p>
+                </div>
+            {% endif %}
+            
+            <!-- Error Messages -->
+            {% if error_messages %}
+                <div id="errorMessages">
+                    <ul>
+                        {% for error in error_messages %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            <div class="main1">
+                <div class="subleft">
+                    <div class="in1">
+                        <label><b>Full Name</b></label><br>
+                    </div>
+                    <div class="in2">
+                        <input type="text" name="fullname" id="fullname" placeholder="Enter your full name" required><br>
+                    </div>
+                    <div class="in3">
+                        <label><b>Email</b></label><br>
+                    </div>
+                    <div class="in4">
+                        <input type="email" name="mail" id="email" placeholder="Enter your email" required><br>
+                    </div>
+                    <div class="in5">
+                        <label><b>Password</b></label><br>
+                    </div>
+                    <div class="in6">
+                        <input type="password" name="pass" id="password" placeholder="Enter your password" required>
+                    </div>
+                </div>
+                <div class="subright">
+                    <div class="in7">
+                        <label><b>Username</b></label><br>
+                    </div>
+                    <div class="in8">
+                        <input type="text" name="username" id="username" placeholder="Enter your username" required><br>
+                    </div>
+                    <div class="in9">
+                        <label><b>PhoneNumber</b></label><br>
+                    </div>
+                    <div class="in10">
+                        <input type="tel" name="phone" id="phone" placeholder="Enter your phone number" required><br>
+                    </div>
+                    <div class="in11">
+                        <label><b>Confirm Password</b></label><br>
+                    </div>
+                    <div class="in12">
+                        <input type="password" name="confirm_pass" id="confirmPassword" placeholder="Confirm your password" required>
+                    </div>
+                </div>
+            </div>
+            <h2>Gender</h2>
+            <div class="subbottom">
+                <div class="male">
+                    <input type="radio" name="gender" id="male"><label>Male</label>
+                </div>
+                <div class="female">
+                    <input type="radio" name="gender" id="female"><label>Female</label>
+                </div>
+                <div class="other">
+                    <input type="radio" name="gender" id="other"><label>Prefer not to Say</label>
+                </div>    
+            </div>
+            <button class="fullbut">Register</button>
+        </div>
+    </form>
+</body>
+</html>
