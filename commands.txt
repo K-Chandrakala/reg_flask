@@ -1,0 +1,50 @@
+To do containeraization 
+-- install docker
+-- docker build -t imagename .
+-- check image in docker images
+-- docker run -p 5000:5000 imagename
+-- then you get get a url where you can find your reg form 
+To do orchestration 
+-- first install minikube ,kubectl
+--minikube start
+    o/p:Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
+--minikube status
+    o/p:minikube
+    type: Control Plane
+    host: Running
+    kubelet: Running
+    apiserver: Running
+    kubeconfig: Configured
+--kubectl get nodes
+    o/p:NAME       STATUS   ROLES           AGE   VERSION
+    minikube   Ready    control-plane   63s   v1.32.0
+-- kubectl get pods -A
+    o/p:NAMESPACE     NAME                               READY   STATUS    RESTARTS      AGE
+    kube-system   coredns-668d6bf9bc-bbr28           1/1     Running   0             72s
+    kube-system   coredns-668d6bf9bc-sxtrv           1/1     Running   0             72s
+    kube-system   etcd-minikube                      1/1     Running   0             78s
+    kube-system   kube-apiserver-minikube            1/1     Running   0             77s
+    kube-system   kube-controller-manager-minikube   1/1     Running   0             77s
+    kube-system   kube-proxy-mmckh                   1/1     Running   0             73s
+    kube-system   kube-scheduler-minikube            1/1     Running   0             77s
+    kube-system   storage-provisioner                1/1     Running   1 (50s ago)   76s
+-- minikube  image load reg-app
+--minikube image list  //check your image name there
+--now create deployement and service files with yaml extension
+--change the name of image in deployement.yaml(containers--> image) to your image name displayed by minikube image list 
+-- kubectl apply -f deployment.yaml
+    o/p:deployment.apps/registration-app created
+-- kubectl get deployments
+    o/p:NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+    registration-app   0/2     2            0           9s
+--kubectl apply -f service.yaml
+    o/p:service/registration-service created
+-- kubectl get services
+    o/p:NAME                   TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+    kubernetes             ClusterIP   10.96.0.1        <none>        443/TCP        10m
+    registration-service   NodePort    10.101.132.232   <none>        80:32136/TCP   13s
+--kubectl expose deployment registration-app --type=NodePort --port=5000
+    o/p:service/registration-app exposed
+-- minikube service registration-app --url
+    o/p:http://127.0.0.1:49837
+    ❗  Because you are using a Docker driver on windows, the terminal needs to be open to run it.
