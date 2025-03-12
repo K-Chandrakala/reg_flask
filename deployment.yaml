@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: registration-app
+spec:
+  replicas: 2  # Number of container instances
+  selector:
+    matchLabels:
+      app: registration-app
+  template:
+    metadata:
+      labels:
+        app: registration-app
+    spec:
+      containers:
+      - name: registration-app
+        image: reg-app:latest  # Your Docker image name
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5000  # Your Flask app port
